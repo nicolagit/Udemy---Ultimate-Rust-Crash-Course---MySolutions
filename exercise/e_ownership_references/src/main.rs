@@ -14,25 +14,25 @@ fn main() {
     // code with `cargo run apple` and `cargo run apples'.  Hint: use `.ends_with("s")` on the
     // String reference
     //
-    //inspect(&arg);
+    inspect(&arg);
 
     // 2. Write a function `change` that takes a *mutable* reference to a String and adds an "s" to
     // the String if it doesn't already end with "s". Then uncomment and run the code below with
     // `cargo run apple`.  Hint: use `.push_str("s")` on the mutable String reference to add an "s".
     //
-    //change(&mut arg);
-    //println!("I have many {}", arg);
+    change(&mut arg);
+    println!("I have many {}", arg);
 
     // 3. Write a function `eat` that accepts ownership of (consumes) a String and returns a bool
     // indicating whether or not the String both starts with a "b" AND contains an "a".
     // Hint 1: use `.starts_with("b")` and `.contains("a")`
     // Hint 2: `&&` is the boolean "AND" operator
     //
-    //if eat(arg) {
-    //    println!("Might be bananas");
-    //} else {
-    //    println!("Not bananas");
-    //}
+    if eat(arg) {
+        println!("Might be bananas");
+    } else {
+        println!("Not bananas");
+    }
 
     // Try running this program with "boat", "banana", and "grapes" as the arguments :-)
 
@@ -43,8 +43,30 @@ fn main() {
     // Hint: You will need to dereference the mutable reference in order to assign it a
     // new value.
     //
-    // let mut material = "mud".to_string();
-    // println!("This material is just `{}`.", material);
-    // bedazzle(&mut material);
-    // println!("Wow! Now the material is `{}`!", material);
+    let mut material = "mud".to_string();
+    println!("This material is just `{}`.", material);
+    bedazzle(&mut material);
+    println!("Wow! Now the material is `{}`!", material);
+}
+
+fn inspect(input_string: & String) {
+    if input_string.ends_with("s") {
+        println!("The contents of {} is plural", input_string);
+    } else {
+        println!("The contents of {} is singular", input_string);
+    }
+}
+
+fn change(input_string: &mut String) {
+    if ! input_string.ends_with("s") {
+        input_string.push_str("s")
+    }
+}
+
+fn eat(input_string: String) -> bool {
+    input_string.starts_with("b") && input_string.contains("a")
+}
+
+fn bedazzle(input_string: &mut String) {
+    *input_string = String::from("sparkly")
 }
